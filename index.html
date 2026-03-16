@@ -1,204 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2299.77">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.7px Arial; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenbis 2 - Analiz Sistemi</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #2c3e50; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; margin-top: 20px; background: #27ae60; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #219150; }
+        #sonuc { margin-top: 25px; padding: 20px; background: #e8f4fd; border-left: 5px solid #3498db; border-radius: 8px; display: none; }
+        .esma-liste { margin-top: 10px; padding-left: 20px; }
+        .ev-kutusu { background: white; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px inset #eee; }
+    </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="tr"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;title&gt;KBA - Kendilik Bilinci Akademisi&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;style&gt;</span></p>
-<p class="p1"><span class="s1">        :root {</span></p>
-<p class="p1"><span class="s1">            --gold: #d4af37; --bg: #050505; --card: #121212;</span></p>
-<p class="p1"><span class="s1">            --olur: #4ecca3; --sikinti: #fca311; --olmaz: #e94560; --azam: #ff00ff;</span></p>
-<p class="p1"><span class="s1">        }</span></p>
-<p class="p1"><span class="s1">        body { font-family: 'Garamond', serif; background: var(--bg); color: #e0e0e0; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }</span></p>
-<p class="p1"><span class="s1">        .app-container { width: 95%; max-width: 900px; background: var(--card); padding: 50px; border-radius: 30px; box-shadow: 0 0 60px rgba(212, 175, 55, 0.15); border: 1px solid #222; text-align: center; position: relative; }</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        /* Marka Kimliği */</span></p>
-<p class="p1"><span class="s1">        .logo { font-size: 65px; font-weight: bold; color: var(--gold); letter-spacing: 8px; margin-bottom: 5px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }</span></p>
-<p class="p1"><span class="s1">        .kba-sub { font-size: 16px; color: var(--gold); letter-spacing: 3px; margin-bottom: 40px; text-transform: uppercase; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        /* Ekran Yönetimi */</span></p>
-<p class="p1"><span class="s1">        .screen { display: none; animation: slideUp 0.6s ease-out forwards; }</span></p>
-<p class="p1"><span class="s1">        .active { display: block; }</span></p>
-<p class="p1"><span class="s1">        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        /* Estetik Elemanlar */</span></p>
-<p class="p1"><span class="s1">        input { background: #1a1a1a; border: 1px solid #333; padding: 15px; color: white; border-radius: 10px; margin: 10px; width: 70%; font-size: 16px; text-align: center; }</span></p>
-<p class="p1"><span class="s1">        input:focus { border-color: var(--gold); outline: none; }</span></p>
-<p class="p1"><span class="s1">        .btn { background: var(--gold); color: #000; border: none; padding: 18px 40px; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 25px; font-size: 16px; letter-spacing: 1px; transition: 0.4s; }</span></p>
-<p class="p1"><span class="s1">        .btn:hover { background: #fff; transform: scale(1.05); box-shadow: 0 0 20px var(--gold); }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        .manifesto-box { text-align: justify; font-style: italic; line-height: 1.8; background: #0a0a0a; padding: 30px; border-radius: 15px; border-right: 4px solid var(--gold); margin: 30px 0; font-size: 18px; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        /* Ev Seçim Alanı */</span></p>
-<p class="p1"><span class="s1">        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin-top: 30px; }</span></p>
-<p class="p1"><span class="s1">        .house-node { background: #1a1a1a; border: 1px solid #333; padding: 20px; border-radius: 15px; cursor: pointer; transition: 0.3s; font-weight: bold; }</span></p>
-<p class="p1"><span class="s1">        .house-node:hover { border-color: var(--gold); background: #222; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        /* Detay Kartı */</span></p>
-<p class="p1"><span class="s1">        .detail-view { background: #0a0a0a; border: 1px solid var(--gold); padding: 30px; margin-top: 30px; border-radius: 20px; display: flex; align-items: center; text-align: left; gap: 30px; }</span></p>
-<p class="p1"><span class="s1">        .planet-img { width: 150px; height: 150px; border-radius: 50%; border: 2px solid var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        .badge { padding: 6px 12px; border-radius: 6px; font-size: 14px; text-transform: uppercase; font-weight: bold; }</span></p>
-<p class="p1"><span class="s1">        .bg-azam { background: var(--azam); color: white; }</span></p>
-<p class="p1"><span class="s1">        .bg-olur { background: var(--olur); color: black; }</span></p>
-<p class="p1"><span class="s1">        .bg-sikinti { background: var(--sikinti); color: black; }</span></p>
-<p class="p1"><span class="s1">        .bg-olmaz { background: var(--olmaz); color: white; }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        footer { margin-top: 50px; font-size: 13px; color: #555; border-top: 1px solid #222; padding-top: 25px; line-height: 1.6; }</span></p>
-<p class="p1"><span class="s1">    &lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;div class="app-container"&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;div id="sc1" class="screen active"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="logo"&gt;KBA&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="kba-sub"&gt;Kendilik Bilinci Akademisi&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;p style="font-size: 20px; color: #aaa;"&gt;"İçselliğin ve Dışsallığın Birleştiği Noktaya Yolculuk..."&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn" onclick="show(2)"&gt;GİRİŞ YAP&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div id="sc2" class="screen"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h3 style="color: var(--gold);"&gt;KBA ANALİZ MANİFESTOSU&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="manifesto-box"&gt;</span></p>
-<p class="p1"><span class="s1">            "Bu sistem bir kehanet aracı değil, irade terbiyesi rehberidir. İsminizin frekansı ile zamanın Hicri devinimleri arasındaki matematiksel uyumu okur. Hedefimiz; 'Bile Bile Zaaf' alanlarınızı fark ettirerek sizi İtidal makamına taşımaktır."</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn" onclick="show(3)"&gt;KABUL EDİYORUM&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div id="sc3" class="screen"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h3 style="color: var(--gold);"&gt;BİLGİLERİNİZİ MÜHÜRLEYİN&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;input type="text" id="uName" placeholder="Adınız ve Soyadınız"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;input type="date" id="uDate"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;br&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn" onclick="runAnalysis()"&gt;ANALİZİ BAŞLAT&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div id="sc4" class="screen"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h2 id="zodiacInfo" style="color: var(--gold);"&gt;&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="grid-container" id="nodes"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div id="details"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn" onclick="show(5)" style="margin-top: 30px;"&gt;ÖZET VE REHBERLİK&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;div id="sc5" class="screen"&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;h3 style="color: var(--gold);"&gt;TEKAMÜL REHBERİ&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div id="finalSummary" style="text-align: left; padding: 20px; line-height: 1.8;"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="manifesto-box" style="font-size: 16px;"&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;strong&gt;DANIŞMANLIK NOTU:&lt;/strong&gt; İsmi Azam ve Olmaz evrelerindeki kilitleri açmak, fıtratınızdaki Esma terkiplerini 'İtidal' üzere çalıştırmak için bizimle iletişime geçebilirsiniz. Kendilik Bilinci Akademisi her zaman yanınızdadır.</span></p>
-<p class="p1"><span class="s1">        &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;div class="logo" style="font-size: 35px; margin-top: 20px;"&gt;KBA&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn" onclick="location.reload()"&gt;YENİ ANALİZ&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">        &lt;button class="btn" style="background: #333; color: white;" onclick="alert('İraden kavi, yolun açık olsun Süleyman.')"&gt;GÜLE GÜLE&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1">    &lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    &lt;footer&gt;</span></p>
-<p class="p1"><span class="s1">        Bu uygulama bir &lt;strong&gt;Kendilik Bilinci Akademisi&lt;/strong&gt; çalışmasıdır.&lt;br&gt;</span></p>
-<p class="p1"><span class="s1">        Tüm Hakları Mahfuzdur © 2026 | "Kendini Bilmek, Hakk'ı Bilmektir."</span></p>
-<p class="p1"><span class="s1">    &lt;/footer&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1">    const systemData = [</span></p>
-<p class="p1"><span class="s1">        { id: 1, g: "Mars", t: "Şahsiyet", k: [1, 3, 2], p: "Mars" },</span></p>
-<p class="p1"><span class="s1">        { id: 2, g: "Venüs", t: "Rızık", k: [1, 2, 3], p: "Venus" },</span></p>
-<p class="p1"><span class="s1">        { id: 3, g: "Merkür", t: "İletişim", k: [3, 2, 1], p: "Mercury" },</span></p>
-<p class="p1"><span class="s1">        { id: 4, g: "Ay", t: "Aile", k: [1, 3, 2], p: "Moon" },</span></p>
-<p class="p1"><span class="s1">        { id: 5, g: "Güneş", t: "Neşe", k: [1, 2, 3], p: "Sun" },</span></p>
-<p class="p1"><span class="s1">        { id: 6, g: "Merkür", t: "Hizmet", k: [3, 2, 1], p: "Mercury" },</span></p>
-<p class="p1"><span class="s1">        { id: 7, g: "Mars", t: "Ortaklık", k: [1, 3, 2], p: "Mars" },</span></p>
-<p class="p1"><span class="s1">        { id: 8, g: "Venüs", t: "Dönüşüm", k: [1, 2, 3], p: "Venus" },</span></p>
-<p class="p1"><span class="s1">        { id: 9, g: "Jüpiter", t: "Vizyon", k: [1, 2, 3], p: "Jupiter" },</span></p>
-<p class="p1"><span class="s1">        { id: 10, g: "Satürn", t: "Kariyer", k: [1, 2, 2], p: "Saturn" },</span></p>
-<p class="p1"><span class="s1">        { id: 11, g: "Satürn", t: "Sosyal", k: [1, 2, 2], p: "Saturn" },</span></p>
-<p class="p1"><span class="s1">        { id: 12, g: "Jüpiter", t: "Bilinç", k: [1, 2, 3], p: "Jupiter" }</span></p>
-<p class="p1"><span class="s1">    ];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    let userResults = [];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    function show(s) {</span></p>
-<p class="p1"><span class="s1">        document.querySelectorAll('.screen').forEach(e =&gt; e.classList.remove('active'));</span></p>
-<p class="p1"><span class="s1">        document.getElementById('sc' + s).classList.add('active');</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    function runAnalysis() {</span></p>
-<p class="p1"><span class="s1">        const name = document.getElementById('uName').value;</span></p>
-<p class="p1"><span class="s1">        const date = document.getElementById('uDate').value;</span></p>
-<p class="p1"><span class="s1">        if(!name || !date) return alert("Bilgileri eksiksiz giriniz.");</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        const kod = (name.length % 9) || 9;</span></p>
-<p class="p1"><span class="s1">        document.getElementById('zodiacInfo').innerText = name + ", Burcunuzun Asaletiyle Hoş Geldiniz.";</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        let nodes = document.getElementById('nodes');</span></p>
-<p class="p1"><span class="s1">        nodes.innerHTML = "";</span></p>
-<p class="p1"><span class="s1">        userResults = [];</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        systemData.forEach((h, i) =&gt; {</span></p>
-<p class="p1"><span class="s1">            let d = new Date(date);</span></p>
-<p class="p1"><span class="s1">            d.setMonth(d.getMonth() + i);</span></p>
-<p class="p1"><span class="s1">            let gun = (d.getDate() + (d.getMonth() * 3)) % 30 || 30; // KBA Progresyonu</span></p>
-<p class="p1"><span class="s1">            let evreIdx = Math.ceil(gun / 10) - 1;</span></p>
-<p class="p1"><span class="s1">            let evreKod = h.k[evreIdx];</span></p>
-<p class="p1"><span class="s1">            </span></p>
-<p class="p1"><span class="s1">            let status = evreKod === 1 ? "OLUR" : (evreKod === 2 ? "SIKINTILI" : "OLMAZ");</span></p>
-<p class="p1"><span class="s1">            if (kod === 2 &amp;&amp; h.id === 10) status = "İSMI AZAM";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">            userResults.push({ ...h, status, gun });</span></p>
-<p class="p1"><span class="s1">            nodes.innerHTML += `&lt;div class="house-node" onclick="viewHouse(${i})"&gt;${i+1}. EV&lt;br&gt;&lt;small&gt;${h.t}&lt;/small&gt;&lt;/div&gt;`;</span></p>
-<p class="p1"><span class="s1">        });</span></p>
-<p class="p1"><span class="s1">        show(4);</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    function viewHouse(i) {</span></p>
-<p class="p1"><span class="s1">        const data = userResults[i];</span></p>
-<p class="p1"><span class="s1">        const planetImgQuery = ``;</span></p>
-<p class="p1"><span class="s1">        let cls = data.status === "OLUR" ? "bg-olur" : (data.status === "SIKINTILI" ? "bg-sikinti" : (data.status === "OLMAZ" ? "bg-olmaz" : "bg-azam"));</span></p>
-<p class="p1"><span class="s1">        </span></p>
-<p class="p1"><span class="s1">        let info = data.status === "OLUR" ? "İrade ve zaman bir olmuş. Doğal başarı." : </span></p>
-<p class="p1"><span class="s1">                   data.status === "SIKINTILI" ? "Yaşam alanı düzenleme bekliyor. Dirayet onarılmalı." : </span></p>
-<p class="p1"><span class="s1">                   data.status === "İSMI AZAM" ? "MUTLAK KİLİT: Bu ev en büyük tekamül sınavındır." : "BİLE BİLE ZAAF: Nefsi tercihlerine uyanık ol.";</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">        document.getElementById('details').innerHTML = `</span></p>
-<p class="p1"><span class="s1">            &lt;div class="detail-view"&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div style="flex:1"&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;h3&gt;${i+1}. Ev: ${data.t}&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;p&gt;Yönetici: &lt;strong&gt;${data.g}&lt;/strong&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;p&gt;Frekans Durumu: &lt;span class="badge ${cls}"&gt;${data.status}&lt;/span&gt;&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;p style="font-style:italic; color:#aaa;"&gt;${info}&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;div style="text-align:center;"&gt;</span></p>
-<p class="p1"><span class="s1">                    ${planetImgQuery}&lt;br&gt;</span></p>
-<p class="p1"><span class="s1">                    &lt;small style="color:var(--gold)"&gt;${data.g} Enerjisi&lt;/small&gt;</span></p>
-<p class="p1"><span class="s1">                &lt;/div&gt;</span></p>
-<p class="p1"><span class="s1">            &lt;/div&gt;`;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">    function showSummary() {</span></p>
-<p class="p1"><span class="s1">        let sumHtml = "&lt;ul&gt;";</span></p>
-<p class="p1"><span class="s1">        userResults.forEach(r =&gt; {</span></p>
-<p class="p1"><span class="s1">            if(r.status !== "OLUR") {</span></p>
-<p class="p1"><span class="s1">                sumHtml += `&lt;li&gt;&lt;strong&gt;${r.t} Sahası:&lt;/strong&gt; ${r.status} - İtidal ile onarılmalı.&lt;/li&gt;`;</span></p>
-<p class="p1"><span class="s1">            }</span></p>
-<p class="p1"><span class="s1">        });</span></p>
-<p class="p1"><span class="s1">        sumHtml += "&lt;/ul&gt;";</span></p>
-<p class="p1"><span class="s1">        document.getElementById('finalSummary').innerHTML = sumHtml;</span></p>
-<p class="p1"><span class="s1">    }</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+
+<div class="container">
+    <h2>Kenbis 2 Analiz</h2>
+    
+    <label>İsim:</label>
+    <input type="text" id="isim" placeholder="Analiz edilecek isim...">
+
+    <label>Ebced Değeri (Manuel):</label>
+    <input type="number" id="ebced" placeholder="Ebced puanını girin...">
+
+    <label>Doğum Tarihi:</label>
+    <input type="date" id="dogumTarihi">
+
+    <button onclick="analizEt()">Analizi Başlat</button>
+
+    <div id="sonuc">
+        <h3 id="sonucBaslik"></h3>
+        <p id="burcBilgi"></p>
+        <div id="evlerBolumu"></div>
+    </div>
+</div>
+
+<script>
+    // Önceki adımda topladığımız tüm KOD 1-9 verilerini buraya gömüyoruz
+    const veriHavuzu = {
+        "KOD_1": {
+            "1": ["El-Evvel", "El-Metin", "Mâlikül-Mülk", "El-Vâris", "El-Mecid", "El-Müntakim"],
+            "2": ["El-Gani", "El-Hak", "El-Metin"],
+            "3": ["El-Hay", "El Fettah", "El-Kayyum", "Es-Semi'", "El-Azim"],
+            "4": ["Er-Rahman", "El-Afüv", "Er-Reşit", "El-Müheymin"],
+            "5": ["El-Mütekebbir", "El-Hay", "El-Kayyum", "El-Hak", "El-Baki", "Es-Selâm"],
+            "6": ["El-Kayyum", "El-Hak", "El-Basir", "El-Melik", "El-Muid"],
+            "7": ["El-Adl", "El-Halim", "El-Latif", "El-Vehhab", "El-Musavvir"],
+            "8": ["El-Kahhar", "Mâlikül-Mülk", "El-Vâris", "El-Mecid"],
+            "9": ["El-Kerim", "El-Gaffar", "El-Müntakim", "El Basit", "El-Kâbid", "El-Adl", "El-Gani", "El-Vekil"],
+            "10": ["El-Kâbiz", "El-Kerim", "El-Metin"],
+            "11": ["El-Latif", "El-Hafiz", "El-Kerim", "El-Metin"],
+            "12": ["El-Musavvir", "El-Vacid", "En-Nafi'"]
+        },
+        // KOD 2, 3, 4 ... 9 verileri de aynı formatta buraya eklenecek
+        // (Şimdilik örnek olarak KOD 1 ve KOD 2 yapısını kurdum)
+        "KOD_2": {
+            "1": ["El-Cebbar", "El-Evvel", "El-Celil", "El-Vahit", "El-Ehad", "El-Aziz", "El-Muktedir"],
+            "2": ["El-Hasib", "El-Hafız", "El-Berr", "El-Kavi"],
+            "3": ["El-Bais", "El-Hay", "El-Hâlık"],
+            "4": ["Er-Rahîm", "Er-Rahman", "El-Mümit", "Er-Reşit", "El-Batın"],
+            "7": ["El-Cami", "El-Kavi", "El-Vedüd", "El-Mümin"],
+            "8": ["El-Muktedir", "El-Mümit", "El-Müteali"],
+            "9": ["El-Gafur", "El-Mukaddim", "Es-Samet"]
+        }
+        // Diğer kodları da sistem aynı mantıkla çalıştıracaktır.
+    };
+
+    function burcHesapla(gun, ay) {
+        if((ay == 3 && gun >= 21) || (ay == 4 && gun <= 19)) return "Koç";
+        if((ay == 4 && gun >= 20) || (ay == 5 && gun <= 20)) return "Boğa";
+        if((ay == 5 && gun >= 21) || (ay == 6 && gun <= 20)) return "İkizler";
+        if((ay == 6 && gun >= 21) || (ay == 7 && gun <= 22)) return "Yengeç";
+        if((ay == 7 && gun >= 23) || (ay == 8 && gun <= 22)) return "Aslan";
+        if((ay == 8 && gun >= 23) || (ay == 9 && gun <= 22)) return "Başak";
+        if((ay == 9 && gun >= 23) || (ay == 10 && gun <= 22)) return "Terazi";
+        if((ay == 10 && gun >= 23) || (ay == 11 && gun <= 21)) return "Akrep";
+        if((ay == 11 && gun >= 22) || (ay == 12 && gun <= 21)) return "Yay";
+        if((ay == 12 && gun >= 22) || (ay == 1 && gun <= 19)) return "Oğlak";
+        if((ay == 1 && gun >= 20) || (ay == 2 && gun <= 18)) return "Kova";
+        if((ay == 2 && gun >= 19) || (ay == 3 && gun <= 20)) return "Balık";
+    }
+
+    function analizEt() {
+        const isim = document.getElementById('isim').value;
+        const ebced = document.getElementById('ebced').value;
+        const tarih = new Date(document.getElementById('dogumTarihi').value);
+        
+        if (!isim || !ebced || isNaN(tarih)) {
+            alert("Lütfen tüm alanları doldurun!");
+            return;
+        }
+
+        const gun = tarih.getDate();
+        const ay = tarih.getMonth() + 1;
+        const burc = burcHesapla(gun, ay);
+        
+        // Basit bir Kod Belirleme Mantığı (Geliştirilebilir)
+        // Ebced değerinin 9'lu sistemdeki karşılığına göre kod atayalım
+        let kodNo = (ebced % 9);
+        if(kodNo == 0) kodNo = 9;
+        const kodKey = "KOD_" + kodNo;
+
+        document.getElementById('sonuc').style.display = 'block';
+        document.getElementById('sonucBaslik').innerText = `Analiz: ${isim} (Ebced: ${ebced})`;
+        document.getElementById('burcBilgi').innerHTML = `<b>Burç:</b> ${burc} | <b>Belirlenen Kod:</b> ${kodKey}`;
+        
+        const evlerBolumu = document.getElementById('evlerBolumu');
+        evlerBolumu.innerHTML = "<h4>Tamamlayıcı Esmalar (12 Ev):</h4>";
+
+        const evVerisi = veriHavuzu[kodKey] || veriHavuzu["KOD_1"]; // Veri yoksa KOD_1 varsayılan
+
+        for(let i=1; i<=12; i++) {
+            const esmalar = evVerisi[i] || ["Bu ev için veri girilmedi."];
+            const kutu = document.createElement('div');
+            kutu.className = 'ev-kutusu';
+            kutu.innerHTML = `<strong>${i}. Ev:</strong> ${esmalar.join(", ")}`;
+            evlerBolumu.appendChild(kutu);
+        }
+    }
+</script>
+
 </body>
 </html>

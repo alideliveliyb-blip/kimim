@@ -83,33 +83,3 @@
             </tbody>
     </table>
 </div>
-
-<script>
-    // Örnek Veri (Normalde LocalStorage'dan okunacak)
-    const vakalar = JSON.parse(localStorage.getItem('kba_vakalar')) || [
-        { tarih: "18.03.2026", isim: "Şaban", gun: "Cuma (Venüs)", etki: "Cemal", itidal: "Hüsn-ü Zan", renk: "tag-cemal" },
-        { tarih: "17.03.2026", isim: "İsmail", gun: "Perşembe (Jüpiter)", etki: "Celal", itidal: "Saygılı Şahsiyet", renk: "tag-celal" }
-    ];
-
-    function listele() {
-        const liste = document.getElementById("vakaListesi");
-        document.getElementById("totalAnaliz").innerText = vakalar.length;
-        document.getElementById("totalDanisan").innerText = [...new Set(vakalar.map(v => v.isim))].length;
-
-        liste.innerHTML = vakalar.map(v => `
-            <tr>
-                <td>${v.tarih}</td>
-                <td><b>${v.isim}</b></td>
-                <td>${v.gun}</td>
-                <td><span class="status-tag ${v.renk}">${v.etki}</span></td>
-                <td>${v.itidal}</td>
-                <td><button style="cursor:pointer; border:none; background:none; color:#3498db;">👁️ Görüntüle</button></td>
-            </tr>
-        `).join('');
-    }
-
-    listele();
-</script>
-
-</body>
-</html>

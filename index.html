@@ -3,126 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenbis 2 - Analiz Sistemi</title>
+    <title>KBA Ana Kontrol Paneli</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; color: #333; padding: 20px; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #2c3e50; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input, select { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; padding: 15px; margin-top: 20px; background: #27ae60; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #219150; }
-        #sonuc { margin-top: 25px; padding: 20px; background: #e8f4fd; border-left: 5px solid #3498db; border-radius: 8px; display: none; }
-        .esma-liste { margin-top: 10px; padding-left: 20px; }
-        .ev-kutusu { background: white; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px inset #eee; }
+        :root { --kba-gold: #c5a059; --kba-dark: #2c3e50; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; display: flex; }
+        
+        /* Yan Menü (Sidebar) */
+        .sidebar { width: 250px; background: var(--kba-dark); color: white; height: 100vh; padding: 20px; position: fixed; }
+        .logo-box { text-align: center; border-bottom: 1px solid #455a64; padding-bottom: 20px; margin-bottom: 20px; }
+        .nav-link { display: block; color: #bdc3c7; text-decoration: none; padding: 12px; border-radius: 5px; margin-bottom: 10px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { background: var(--kba-gold); color: white; }
+
+        /* Ana İçerik Alanı */
+        .main-content { margin-left: 280px; padding: 30px; width: calc(100% - 310px); }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid var(--kba-gold); }
+        .stat-card h3 { margin: 0; color: #7f8c8d; font-size: 14px; text-transform: uppercase; }
+        .stat-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: var(--kba-dark); }
+
+        /* Vaka Tablosu */
+        .vaka-table { width: 100%; background: white; border-radius: 10px; border-collapse: collapse; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .vaka-table th { background: #ecf0f1; padding: 15px; text-align: left; color: var(--kba-dark); }
+        .vaka-table td { padding: 15px; border-bottom: 1px solid #eee; }
+        .vaka-table tr:hover { background: #f9f9f9; }
+        
+        .status-tag { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .tag-celal { background: #ffdada; color: #e74c3c; }
+        .tag-cemal { background: #d4edda; color: #28a745; }
+
+        .btn-new { background: var(--kba-gold); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; float: right; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>Kenbis 2 Analiz</h2>
-    
-    <label>İsim:</label>
-    <input type="text" id="isim" placeholder="Analiz edilecek isim...">
-
-    <label>Ebced Değeri (Manuel):</label>
-    <input type="number" id="ebced" placeholder="Ebced puanını girin...">
-
-    <label>Doğum Tarihi:</label>
-    <input type="date" id="dogumTarihi">
-
-    <button onclick="analizEt()">Analizi Başlat</button>
-
-    <div id="sonuc">
-        <h3 id="sonucBaslik"></h3>
-        <p id="burcBilgi"></p>
-        <div id="evlerBolumu"></div>
+<div class="sidebar">
+    <div class="logo-box">
+        <div style="font-size: 30px; font-weight: bold; color: var(--kba-gold);">KB</div>
+        <div style="font-size: 10px; letter-spacing: 1px;">SİSTEMİK YÖNETİM</div>
     </div>
+    <a href="#" class="nav-link active">🏠 Ana Panel</a>
+    <a href="#" class="nav-link">📋 Tüm Vakalar</a>
+    <a href="#" class="nav-link">⚙️ Ayarlar</a>
+    <div style="position: absolute; bottom: 20px; font-size: 10px; color: #7f8c8d;">© 2026 KBA - Her Hakkı Mahfuzdur.</div>
+</div>
+
+<div class="main-content">
+    <button class="btn-new" onclick="window.location.reload()">🔄 Listeyi Güncelle</button>
+    <h1>Hoş Geldin, Süleyman</h1>
+    <p style="color: #7f8c8d;">Sistemdeki güncel durum ve vaka geçmişi aşağıdadır.</p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Toplam Analiz</h3>
+            <p id="totalAnaliz">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Aktif Danışanlar</h3>
+            <p id="totalDanisan">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>İtidal Başarısı</h3>
+            <p>%94</p>
+        </div>
+    </div>
+
+    <h3>Son Yapılan Uygulamalar</h3>
+    <table class="vaka-table">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Sorgu Sahibi</th>
+                <th>Vakit (Gün)</th>
+                <th>Etki Tipi</th>
+                <th>Seçilen İtidal</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody id="vakaListesi">
+            </tbody>
+    </table>
 </div>
 
 <script>
-    // Önceki adımda topladığımız tüm KOD 1-9 verilerini buraya gömüyoruz
-    const veriHavuzu = {
-        "KOD_1": {
-            "1": ["El-Evvel", "El-Metin", "Mâlikül-Mülk", "El-Vâris", "El-Mecid", "El-Müntakim"],
-            "2": ["El-Gani", "El-Hak", "El-Metin"],
-            "3": ["El-Hay", "El Fettah", "El-Kayyum", "Es-Semi'", "El-Azim"],
-            "4": ["Er-Rahman", "El-Afüv", "Er-Reşit", "El-Müheymin"],
-            "5": ["El-Mütekebbir", "El-Hay", "El-Kayyum", "El-Hak", "El-Baki", "Es-Selâm"],
-            "6": ["El-Kayyum", "El-Hak", "El-Basir", "El-Melik", "El-Muid"],
-            "7": ["El-Adl", "El-Halim", "El-Latif", "El-Vehhab", "El-Musavvir"],
-            "8": ["El-Kahhar", "Mâlikül-Mülk", "El-Vâris", "El-Mecid"],
-            "9": ["El-Kerim", "El-Gaffar", "El-Müntakim", "El Basit", "El-Kâbid", "El-Adl", "El-Gani", "El-Vekil"],
-            "10": ["El-Kâbiz", "El-Kerim", "El-Metin"],
-            "11": ["El-Latif", "El-Hafiz", "El-Kerim", "El-Metin"],
-            "12": ["El-Musavvir", "El-Vacid", "En-Nafi'"]
-        },
-        // KOD 2, 3, 4 ... 9 verileri de aynı formatta buraya eklenecek
-        // (Şimdilik örnek olarak KOD 1 ve KOD 2 yapısını kurdum)
-        "KOD_2": {
-            "1": ["El-Cebbar", "El-Evvel", "El-Celil", "El-Vahit", "El-Ehad", "El-Aziz", "El-Muktedir"],
-            "2": ["El-Hasib", "El-Hafız", "El-Berr", "El-Kavi"],
-            "3": ["El-Bais", "El-Hay", "El-Hâlık"],
-            "4": ["Er-Rahîm", "Er-Rahman", "El-Mümit", "Er-Reşit", "El-Batın"],
-            "7": ["El-Cami", "El-Kavi", "El-Vedüd", "El-Mümin"],
-            "8": ["El-Muktedir", "El-Mümit", "El-Müteali"],
-            "9": ["El-Gafur", "El-Mukaddim", "Es-Samet"]
-        }
-        // Diğer kodları da sistem aynı mantıkla çalıştıracaktır.
-    };
+    // Örnek Veri (Normalde LocalStorage'dan okunacak)
+    const vakalar = JSON.parse(localStorage.getItem('kba_vakalar')) || [
+        { tarih: "18.03.2026", isim: "Şaban", gun: "Cuma (Venüs)", etki: "Cemal", itidal: "Hüsn-ü Zan", renk: "tag-cemal" },
+        { tarih: "17.03.2026", isim: "İsmail", gun: "Perşembe (Jüpiter)", etki: "Celal", itidal: "Saygılı Şahsiyet", renk: "tag-celal" }
+    ];
 
-    function burcHesapla(gun, ay) {
-        if((ay == 3 && gun >= 21) || (ay == 4 && gun <= 19)) return "Koç";
-        if((ay == 4 && gun >= 20) || (ay == 5 && gun <= 20)) return "Boğa";
-        if((ay == 5 && gun >= 21) || (ay == 6 && gun <= 20)) return "İkizler";
-        if((ay == 6 && gun >= 21) || (ay == 7 && gun <= 22)) return "Yengeç";
-        if((ay == 7 && gun >= 23) || (ay == 8 && gun <= 22)) return "Aslan";
-        if((ay == 8 && gun >= 23) || (ay == 9 && gun <= 22)) return "Başak";
-        if((ay == 9 && gun >= 23) || (ay == 10 && gun <= 22)) return "Terazi";
-        if((ay == 10 && gun >= 23) || (ay == 11 && gun <= 21)) return "Akrep";
-        if((ay == 11 && gun >= 22) || (ay == 12 && gun <= 21)) return "Yay";
-        if((ay == 12 && gun >= 22) || (ay == 1 && gun <= 19)) return "Oğlak";
-        if((ay == 1 && gun >= 20) || (ay == 2 && gun <= 18)) return "Kova";
-        if((ay == 2 && gun >= 19) || (ay == 3 && gun <= 20)) return "Balık";
+    function listele() {
+        const liste = document.getElementById("vakaListesi");
+        document.getElementById("totalAnaliz").innerText = vakalar.length;
+        document.getElementById("totalDanisan").innerText = [...new Set(vakalar.map(v => v.isim))].length;
+
+        liste.innerHTML = vakalar.map(v => `
+            <tr>
+                <td>${v.tarih}</td>
+                <td><b>${v.isim}</b></td>
+                <td>${v.gun}</td>
+                <td><span class="status-tag ${v.renk}">${v.etki}</span></td>
+                <td>${v.itidal}</td>
+                <td><button style="cursor:pointer; border:none; background:none; color:#3498db;">👁️ Görüntüle</button></td>
+            </tr>
+        `).join('');
     }
 
-    function analizEt() {
-        const isim = document.getElementById('isim').value;
-        const ebced = document.getElementById('ebced').value;
-        const tarih = new Date(document.getElementById('dogumTarihi').value);
-        
-        if (!isim || !ebced || isNaN(tarih)) {
-            alert("Lütfen tüm alanları doldurun!");
-            return;
-        }
-
-        const gun = tarih.getDate();
-        const ay = tarih.getMonth() + 1;
-        const burc = burcHesapla(gun, ay);
-        
-        // Basit bir Kod Belirleme Mantığı (Geliştirilebilir)
-        // Ebced değerinin 9'lu sistemdeki karşılığına göre kod atayalım
-        let kodNo = (ebced % 9);
-        if(kodNo == 0) kodNo = 9;
-        const kodKey = "KOD_" + kodNo;
-
-        document.getElementById('sonuc').style.display = 'block';
-        document.getElementById('sonucBaslik').innerText = `Analiz: ${isim} (Ebced: ${ebced})`;
-        document.getElementById('burcBilgi').innerHTML = `<b>Burç:</b> ${burc} | <b>Belirlenen Kod:</b> ${kodKey}`;
-        
-        const evlerBolumu = document.getElementById('evlerBolumu');
-        evlerBolumu.innerHTML = "<h4>Tamamlayıcı Esmalar (12 Ev):</h4>";
-
-        const evVerisi = veriHavuzu[kodKey] || veriHavuzu["KOD_1"]; // Veri yoksa KOD_1 varsayılan
-
-        for(let i=1; i<=12; i++) {
-            const esmalar = evVerisi[i] || ["Bu ev için veri girilmedi."];
-            const kutu = document.createElement('div');
-            kutu.className = 'ev-kutusu';
-            kutu.innerHTML = `<strong>${i}. Ev:</strong> ${esmalar.join(", ")}`;
-            evlerBolumu.appendChild(kutu);
-        }
-    }
+    listele();
 </script>
 
 </body>

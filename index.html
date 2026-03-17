@@ -3,83 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KBA Ana Kontrol Paneli</title>
+    <title>KBA Karar Mekanizması V4</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        :root { --kba-gold: #c5a059; --kba-dark: #2c3e50; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; display: flex; }
-        
-        /* Yan Menü (Sidebar) */
-        .sidebar { width: 250px; background: var(--kba-dark); color: white; height: 100vh; padding: 20px; position: fixed; }
-        .logo-box { text-align: center; border-bottom: 1px solid #455a64; padding-bottom: 20px; margin-bottom: 20px; }
-        .nav-link { display: block; color: #bdc3c7; text-decoration: none; padding: 12px; border-radius: 5px; margin-bottom: 10px; transition: 0.3s; }
-        .nav-link:hover, .nav-link.active { background: var(--kba-gold); color: white; }
-
-        /* Ana İçerik Alanı */
-        .main-content { margin-left: 280px; padding: 30px; width: calc(100% - 310px); }
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid var(--kba-gold); }
-        .stat-card h3 { margin: 0; color: #7f8c8d; font-size: 14px; text-transform: uppercase; }
-        .stat-card p { margin: 10px 0 0; font-size: 24px; font-weight: bold; color: var(--kba-dark); }
-
-        /* Vaka Tablosu */
-        .vaka-table { width: 100%; background: white; border-radius: 10px; border-collapse: collapse; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .vaka-table th { background: #ecf0f1; padding: 15px; text-align: left; color: var(--kba-dark); }
-        .vaka-table td { padding: 15px; border-bottom: 1px solid #eee; }
-        .vaka-table tr:hover { background: #f9f9f9; }
-        
-        .status-tag { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .tag-celal { background: #ffdada; color: #e74c3c; }
-        .tag-cemal { background: #d4edda; color: #28a745; }
-
-        .btn-new { background: var(--kba-gold); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; float: right; }
+        :root { --kba-gold: #c5a059; --kba-dark: #1a252f; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; padding: 10px; margin: 0; }
+        .panel { max-width: 500px; margin: 20px auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 6px solid var(--kba-gold); }
+        .header { background: var(--kba-dark); color: white; padding: 20px; text-align: center; border-radius: 14px 14px 0 0; }
+        .logo { font-size: 40px; font-weight: bold; color: var(--kba-gold); border: 2px solid var(--kba-gold); display: inline-block; width: 60px; height: 60px; line-height: 60px; border-radius: 50%; }
+        .content { padding: 20px; }
+        .step { display: none; }
+        .step.active { display: block; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13px; color: #2c3e50; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+        .btn { width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-gold { background: var(--kba-gold); color: white; }
+        .info-box { background: #eef2f7; padding: 15px; border-radius: 10px; font-size: 14px; margin-bottom: 15px; border-left: 4px solid var(--kba-gold); white-space: pre-line; }
+        #report-result { background: #fffdf5; padding: 20px; border: 1px solid #f1e6b2; border-radius: 10px; line-height: 1.6; }
+        .copyright { text-align: center; font-size: 10px; color: #999; margin-top: 15px; }
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <div class="logo-box">
-        <div style="font-size: 30px; font-weight: bold; color: var(--kba-gold);">KB</div>
-        <div style="font-size: 10px; letter-spacing: 1px;">SİSTEMİK YÖNETİM</div>
-    </div>
-    <a href="#" class="nav-link active">🏠 Ana Panel</a>
-    <a href="#" class="nav-link">📋 Tüm Vakalar</a>
-    <a href="#" class="nav-link">⚙️ Ayarlar</a>
-    <div style="position: absolute; bottom: 20px; font-size: 10px; color: #7f8c8d;">© 2026 KBA - Her Hakkı Mahfuzdur.</div>
-</div>
-
-<div class="main-content">
-    <button class="btn-new" onclick="window.location.reload()">🔄 Listeyi Güncelle</button>
-    <h1>Hoş Geldin, Süleyman</h1>
-    <p style="color: #7f8c8d;">Sistemdeki güncel durum ve vaka geçmişi aşağıdadır.</p>
-
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h3>Toplam Analiz</h3>
-            <p id="totalAnaliz">0</p>
-        </div>
-        <div class="stat-card">
-            <h3>Aktif Danışanlar</h3>
-            <p id="totalDanisan">0</p>
-        </div>
-        <div class="stat-card">
-            <h3>İtidal Başarısı</h3>
-            <p>%94</p>
-        </div>
+<div class="panel">
+    <div class="header">
+        <div class="logo">KB</div>
+        <div style="margin-top:5px; letter-spacing: 2px; font-size: 12px;">SİSTEMİK ANALİZ V4</div>
     </div>
 
-    <h3>Son Yapılan Uygulamalar</h3>
-    <table class="vaka-table">
-        <thead>
-            <tr>
-                <th>Tarih</th>
-                <th>Sorgu Sahibi</th>
-                <th>Vakit (Gün)</th>
-                <th>Etki Tipi</th>
-                <th>Seçilen İtidal</th>
-                <th>İşlem</th>
-            </tr>
-        </thead>
-        <tbody id="vakaListesi">
-            </tbody>
-    </table>
-</div>
+    <div class="content">
+        <div id="step1" class="step active">
+            <div class="info-box" id="vakit-display">Vakit Yükleniyor...</div>
+            <label>Zaman (Şu Anki Gezegen Etkisi):</label>
+            <select id="zamanGezegen">
+                <option value="Mars">Mars (Ya Melik - Ya Kuddüs)</option>
+                <option value="Venüs">Venüs (Ya Latif - Ya Vedud)</option>
+                <option value="Jüpiter">Jüpiter (Ya Alim - Ya Hakim)</option>
+                <option value="Merkür">Merkür (Ya Habir - Ya Melik)</option>
+            </select>
+            <label>1. Kişi (Sorgu Sahibi) ve Kod:</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="n1" placeholder="İsim" style="flex:2;">
+                <input type="number" id="c1" placeholder="Kod" style="flex:1;">
+            </div>
+            <label>2. Kişi ve Kod:</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="n2" placeholder="İsim" style="flex:2;">
+                <input type="number" id="c2" placeholder="Kod" style="flex:1;">
+            </div>
+            <button class="btn btn-gold" onclick="analizEt()">ZAMAN ANALİZİNİ BAŞLAT</button>
+        </div>
+
+        <div id="step2" class="step">
+            <div class="info-box" id="analiz-detay"></div>
+            <label>Yaşanan Sorun (Saha Sapması):</label>
+            <select id="yanlis-hal"></select>
+            <button class="btn btn-gold" onclick="itidalGoster()">ŞİFA KAPISINA GİT</button>
+        </div>
+
+        <div id="step3" class="step">
+            <label id="vakit-itidal-label"></label>
+            <select id="itidal-hal"></select>
+            <button class="btn btn-gold" onclick="raporOlustur()">RAPORU MÜHÜRLE</button>
+        </div>
